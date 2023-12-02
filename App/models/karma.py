@@ -6,7 +6,7 @@ class Karma(db.Model):
   karmaID = db.Column(db.Integer, primary_key=True)
   score = db.Column(db.Float, nullable=False, default=0.0)
   rank = db.Column(db.Integer, nullable=False, default=-99)
-  studentID = db.Column(db.String(10), db.ForeignKey('student.id', use_alter=True))
+  studentID = db.Column(db.String(10), db.ForeignKey('student.id', name='fk_student_id', use_alter=True))
 
   def __init__(self, score=0.0, rank=-99):
     self.score = score
