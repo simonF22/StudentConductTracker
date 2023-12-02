@@ -12,7 +12,7 @@ class Admin(User):
 		self.id = "A" + str(Admin.query.count() + 1)
 
 	def addStudent(self, id, firstname, lastname, contact, studentType, yearofStudy):
-		newKarma = Karma()
+		newKarma = Karma(score=0.0, rank=-99)
 		try:
 			db.session.add(newKarma)
 			db.session.commit()
@@ -26,7 +26,6 @@ class Admin(User):
 		newStudent.karmaID = newKarma.karmaID
 		newKarma.studentID = newStudent.id
 		try:
-			db.session.execute('ALTER TABLE student ADD CONSTRAINT fk_karma_id FOREIGN KEY (karmaID) REFERENCES karma(karmaID)')
 			db.session.add(newStudent)
 			db.session.commit()
 			return newStudent
