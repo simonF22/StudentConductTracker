@@ -24,8 +24,8 @@ def init():
         db.create_all()
         admin= create_admin('bob', 'boblast' , 'bobpass')
             
-        staff = create_staff(admin, '0012', 'John', 'Mann,' 'johnpass', 'johnmann@schooling.com')
-        staff = create_staff(admin, '0013', 'Jane', 'Anne,' 'janepass', 'janeanne@schooling.com')
+        staff = create_staff(admin, '0012', 'John', 'Mann', 'johnpass', 'johnmann@schooling.com')
+        staff = create_staff(admin, '0013', 'Jane', 'Anne', 'janepass', 'janeanne@schooling.com')
 
         student = create_student(admin, '0021', 'Nick', 'Dell', generate_random_contact_number(), random.choice(['Full-Time','Part-Time', 'Evening']), str(random.randint(1, 8)))
         student = create_student(admin, '0022', 'John', 'Biz', generate_random_contact_number(), random.choice(['Full-Time','Part-Time', 'Evening']), str(random.randint(1, 8)))
