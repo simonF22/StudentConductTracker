@@ -78,5 +78,6 @@ class Karma(db.Model):
     return {
       "karmaID": self.karmaID, 
       "score": self.score,
+      "rank" : self.rank,
       "studentID" : self.studentID
     }

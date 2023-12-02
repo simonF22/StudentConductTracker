@@ -1,0 +1,3231 @@
+{
+	"info": {
+		"_postman_id": "50be43cb-cd9a-4255-97da-86f4bee55656",
+		"name": "Student Conduct Tracker - Main",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25721467"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Admin Access Token Returned\", \r",
+									"    function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(pm.response.text()).to.include(\"access_token\");\r",
+									"        pm.environment.set('admin_access_token', jsonData['access_token']) \r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"A1\",\r\n    \"password\": \"bobpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/admin/login"
+					},
+					"response": [
+						{
+							"name": "Admin Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"A1\",\r\n    \"password\": \"bobpass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/admin/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 04:15:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTMxNzcxMSwianRpIjoiZDgyYWY0YzMtMjczMy00MzQxLWIwMTctOWNlMGIyZDQ3YWZlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IkExIiwibmJmIjoxNzAxMzE3NzExLCJleHAiOjE3MDE5MjI1MTF9.wc1jBoQv0Ld6E-EKzDDQbjxPxwQNKfrB4pPVzzw6gwU\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Admin Login - Invalid Credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"should return 'invalid admin credentials'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('invalid admin credentials');\r",
+									"    }\r",
+									");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 401\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(401);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"A30\",\r\n    \"password\": \"bobpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/admin/login"
+					},
+					"response": [
+						{
+							"name": "Admin Login - Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"A30\",\r\n    \"password\": \"bobpass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/admin/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 04:15:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid admin credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Staff Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Staff Access Token Returned\", \r",
+									"    function () {\r",
+									"        var jsonData = pm.response.json();\r",
+									"        pm.expect(pm.response.text()).to.include(\"access_token\");\r",
+									"        pm.environment.set('staff_access_token', jsonData['access_token']) \r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0012\",\r\n    \"password\": \"johnpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/staff/login"
+					},
+					"response": [
+						{
+							"name": "Staff Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0012\",\r\n    \"password\": \"johnpass\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/staff/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "293"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 04:16:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTMxNzc4NCwianRpIjoiZmFiNTZjYWQtM2I1MS00NTg4LTljNmMtZTg4YWRjZWViM2JhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjAwMTIiLCJuYmYiOjE3MDEzMTc3ODQsImV4cCI6MTcwMTkyMjU4NH0.mVRvqWK6F3cqPKUOdlcAApGSx5bSnfxlW5c-wJ2kZ9c\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Staff Login - Invalid Credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"should return 'invalid staff credentials'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('invalid staff credentials');\r",
+									"    }\r",
+									");\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 401\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(401);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0012\",\r\n    \"password\": \"johnpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/staff/login"
+					},
+					"response": [
+						{
+							"name": "Staff Login - Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0012\",\r\n    \"password\": \"johnpassword\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/staff/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 04:16:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid staff credentials\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Get All Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\" : { \r",
+									"        \"type\" : \"object\",\r",
+									"        \"properties\" : {\r",
+									"            \"email\": {\"type\":\"string\"},\r",
+									"            \"firstname\": {\"type\":\"string\"},\r",
+									"            \"id\": {\"type\":\"string\"},\r",
+									"            \"lastname\": {\"type\":\"string\"}\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Course Schema Valid', function() {\r",
+									"        pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 200\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(200);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/api/staff"
+					},
+					"response": [
+						{
+							"name": "Get All Staff",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/api/staff"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "231"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"email\": \"johnmann@schooling.com\",\n        \"firstname\": \"John\",\n        \"id\": \"0012\",\n        \"lastname\": \"Mann\"\n    },\n    {\n        \"email\": \"janeanne@schooling.com\",\n        \"firstname\": \"Jane\",\n        \"id\": \"0013\",\n        \"lastname\": \"Anne\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get All Staff - Forbidden",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"should return 'cannot perform that action'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('cannot perform that action');\r",
+									"    }\r",
+									");\r",
+									"\r",
+									"pm.test(\"Status is 403\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(403);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/api/staff"
+					},
+					"response": [
+						{
+							"name": "Get All Staff - Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/api/staff"
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:20 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"cannot perform that action\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\" : { \r",
+									"        \"type\" : \"object\",\r",
+									"        \"properties\" : {\r",
+									"            \"id\": {\"type\":\"string\"},\r",
+									"            \"firstname\": {\"type\":\"string\"},\r",
+									"            \"lastname\": {\"type\":\"string\"},\r",
+									"            \"contact\": {\"type\":\"string\"},\r",
+									"            \"studentType\": {\"type\":\"string\"},\r",
+									"            \"yearOfStudy\": {\"type\":\"number\"},\r",
+									"            \"karmaScore\": {\"type\":\"number\"},\r",
+									"            \"karmaRank\": {\"type\":\"number\"}\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Course Schema Valid', function() {\r",
+									"        pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 200\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(200);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}, {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/api/students"
+					},
+					"response": [
+						{
+							"name": "Get All Students",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/api/students"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "412"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"contact\": \"0000-377-3283\",\n        \"firstname\": \"Nick\",\n        \"id\": \"0021\",\n        \"karmaRank\": -99,\n        \"karmaScore\": 0,\n        \"lastname\": \"Dell\",\n        \"studentType\": \"Part-Time\",\n        \"yearOfStudy\": 4\n    },\n    {\n        \"contact\": \"0000-466-1622\",\n        \"firstname\": \"John\",\n        \"id\": \"0022\",\n        \"karmaRank\": -99,\n        \"karmaScore\": 0,\n        \"lastname\": \"Biz\",\n        \"studentType\": \"Evening\",\n        \"yearOfStudy\": 7\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"items\" : { \r",
+									"        \"type\" : \"object\",\r",
+									"        \"properties\" : {\r",
+									"            \"id\": {\"type\":\"string\"},\r",
+									"            \"firstname\": {\"type\":\"string\"},\r",
+									"            \"lastname\": {\"type\":\"string\"},\r",
+									"            \"contact\": {\"type\":\"string\"},\r",
+									"            \"studentType\": {\"type\":\"string\"},\r",
+									"            \"yearOfStudy\": {\"type\":\"number\"},\r",
+									"            \"karmaScore\": {\"type\":\"number\"},\r",
+									"            \"karmaRank\": {\"type\":\"number\"}\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Course Schema Valid', function() {\r",
+									"        pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 200\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(200);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}, {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/students/:studentID",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								":studentID"
+							],
+							"variable": [
+								{
+									"key": "studentID",
+									"value": "0021"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Student",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/students/:studentID",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										":studentID"
+									],
+									"variable": [
+										{
+											"key": "studentID",
+											"value": "0021"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "185"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"contact\": \"0000-377-3283\",\n    \"firstname\": \"Nick\",\n    \"id\": \"0021\",\n    \"karmaRank\": -99,\n    \"karmaScore\": 0,\n    \"lastname\": \"Dell\",\n    \"studentType\": \"Part-Time\",\n    \"yearOfStudy\": 4\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Student - Invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"should return 'student not found'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('student not found');\r",
+									"    }\r",
+									");\r",
+									"\r",
+									"pm.test(\"Status is 404\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(404);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}, {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/students/:studentID",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								":studentID"
+							],
+							"variable": [
+								{
+									"key": "studentID",
+									"value": "0101"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Student - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/students/:studentID",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										":studentID"
+									],
+									"variable": [
+										{
+											"key": "studentID",
+											"value": "0101"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"student not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"items\" : { \r",
+									"        \"type\" : \"object\",\r",
+									"        \"properties\" : {\r",
+									"            \"email\": {\"type\":\"string\"},\r",
+									"            \"firstname\": {\"type\":\"string\"},\r",
+									"            \"id\": {\"type\":\"string\"},\r",
+									"            \"lastname\": {\"type\":\"string\"}\r",
+									"        }\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"pm.test('Course Schema Valid', function() {\r",
+									"        pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is 200\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(200);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/staff/:staffID",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								":staffID"
+							],
+							"variable": [
+								{
+									"key": "staffID",
+									"value": "0012"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Staff",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/staff/:staffID",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff",
+										":staffID"
+									],
+									"variable": [
+										{
+											"key": "staffID",
+											"value": "0012"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:14:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"johnmann@schooling.com\",\n    \"firstname\": \"John\",\n    \"id\": \"0012\",\n    \"lastname\": \"Mann\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Staff - Invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"should return 'staff not found'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('staff not found');\r",
+									"    }\r",
+									");\r",
+									"\r",
+									"pm.test(\"Status is 404\", \r",
+									"\tfunction () {\r",
+									"\t\tpm.response.to.have.status(404);\r",
+									"\t}\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/staff/:staffID",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"staff",
+								":staffID"
+							],
+							"variable": [
+								{
+									"key": "staffID",
+									"value": "0200"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Staff - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/staff/:staffID",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"staff",
+										":staffID"
+									],
+									"variable": [
+										{
+											"key": "staffID",
+											"value": "0200"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"staff not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Get request data to check all fields entered\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"// Test for a successful staff creation\r",
+									"pm.test(\"Message contains 'Staff created with ID \" + jsonData.id + \"'\", function () {\r",
+									"    const responseBody = pm.response.text();\r",
+									"    pm.expect(responseBody).to.include(\"staff created with ID \" + jsonData.id);\r",
+									"});\r",
+									"\r",
+									"// Test for a successful staff creation\r",
+									"pm.test(\"All data have been entered for the staff\", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.be.an('array');\r",
+									"    pm.expect(responseJson).to.have.lengthOf(2);\r",
+									"\r",
+									"    // Check the second object in the array (staff data)\r",
+									"    const staffObject = responseJson[1];\r",
+									"    pm.expect(staffObject).to.be.an('object');\r",
+									"    pm.expect(staffObject.firstname).to.equal(jsonData.firstname);\r",
+									"    pm.expect(staffObject.lastname).to.equal(jsonData.lastname);\r",
+									"    pm.expect(staffObject.email).to.equal(jsonData.email);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0015\",\r\n    \"firstname\" : \"Dani\",\r\n    \"lastname\" : \"Kall\",\r\n    \"password\": \"danipass\",\r\n    \"email\" : \"danikall@schooling.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/staff"
+					},
+					"response": [
+						{
+							"name": "Create Staff",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0015\",\r\n    \"firstname\" : \"Dani\",\r\n    \"lastname\" : \"Kall\",\r\n    \"password\": \"danipass\",\r\n    \"email\" : \"danikall@schooling.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/staff"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "170"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"message\": \"staff created with ID 0015\"\n    },\n    {\n        \"email\": \"danikall@schooling.com\",\n        \"firstname\": \"Dani\",\n        \"id\": \"0015\",\n        \"lastname\": \"Kall\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Staff - ID Already Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"pm.test(\"should return 'a staff already uses the ID \" + jsonData.id + \"'\", function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql(\"a staff already uses the ID \" + jsonData.id);\r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0012\",\r\n    \"firstname\": \"John\",\r\n    \"lastname\": \"Doe\",\r\n    \"password\" : \"jdpass\",\r\n    \"email\": \"johndoe@schooling.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/staff"
+					},
+					"response": [
+						{
+							"name": "Create Staff - ID Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0012\",\r\n    \"firstname\": \"John\",\r\n    \"lastname\": \"Doe\",\r\n    \"password\" : \"jdpass\",\r\n    \"email\": \"johndoe@schooling.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/staff"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"a staff already uses the ID 0012\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Staff - Invalid Request Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error Indicates Invalid Data\", function () {\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData['error'].includes('invalid request data')).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"\",\r\n    \"firstname\" : \"\",\r\n    \"lastname\" : \"\",\r\n    \"password\": \"\",\r\n    \"email\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/staff"
+					},
+					"response": [
+						{
+							"name": "Create Staff - Invalid Request Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"firstname\" : \"\",\r\n    \"lastname\" : \"\",\r\n    \"password\": \"\",\r\n    \"email\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/staff"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid request data\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Get request data to check all fields entered\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"// Test for a successful student creation\r",
+									"pm.test(\"Message contains 'Student created with ID \" + jsonData.id + \"'\", function () {\r",
+									"    const responseBody = pm.response.text();\r",
+									"    pm.expect(responseBody).to.include(\"student created with ID \" + jsonData.id);\r",
+									"});\r",
+									"\r",
+									"// Test for a successful student creation\r",
+									"pm.test(\"All data have been entered for the student\", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.be.an('array');\r",
+									"    pm.expect(responseJson).to.have.lengthOf(2);\r",
+									"\r",
+									"    // Check the second object in the array (student data)\r",
+									"    const studentObject = responseJson[1];\r",
+									"    pm.expect(studentObject).to.be.an('object');\r",
+									"    pm.expect(studentObject.firstname).to.equal(jsonData.firstname);\r",
+									"    pm.expect(studentObject.lastname).to.equal(jsonData.lastname);\r",
+									"    pm.expect(studentObject.contact).to.equal(jsonData.contact);\r",
+									"    pm.expect(studentObject.studentType).to.equal(jsonData.studentType);\r",
+									"    pm.expect(parseInt(studentObject.yearOfStudy)).to.equal(parseInt(jsonData.yearOfStudy));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0026\",\r\n    \"firstname\" : \"Alice\",\r\n    \"lastname\" : \"Dell\",\r\n    \"contact\" : \"786-411-4832\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/students"
+					},
+					"response": [
+						{
+							"name": "Create Student",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0026\",\r\n    \"firstname\" : \"Alice\",\r\n    \"lastname\" : \"Dell\",\r\n    \"contact\" : \"786-411-4832\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/students"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "264"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"message\": \"student created with ID 0026\"\n    },\n    {\n        \"contact\": \"786-411-4832\",\n        \"firstname\": \"Alice\",\n        \"id\": \"0026\",\n        \"karmaRank\": -99,\n        \"karmaScore\": 0,\n        \"lastname\": \"Dell\",\n        \"studentType\": \"Full-Time\",\n        \"yearOfStudy\": 4\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create Student - Invalid Request Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error Indicates Invalid Data\", function () {\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData['error'].includes('invalid request data')).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"\",\r\n    \"firstname\" : \"\",\r\n    \"lastname\" : \"\",\r\n    \"contact\" : \"\",\r\n    \"studentType\": \"\",\r\n    \"yearOfStudy\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/students"
+					},
+					"response": [
+						{
+							"name": "Create Student - Invalid Request Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n    \"firstname\" : \"\",\r\n    \"lastname\" : \"\",\r\n    \"contact\" : \"\",\r\n    \"studentType\": \"\",\r\n    \"yearOfStudy\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/students"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:15:58 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid request data\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Student - ID Already Exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"pm.test(\"should return 'a student already uses the ID \" + jsonData.id + \"'\", function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql(\"a student already uses the ID \" + jsonData.id);\r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"0021\",\r\n    \"firstname\" : \"Jane\",\r\n    \"lastname\" : \"Dane\",\r\n    \"contact\" : \"786-411-4832\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/students"
+					},
+					"response": [
+						{
+							"name": "Create Student - ID Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"0021\",\r\n    \"firstname\" : \"Jane\",\r\n    \"lastname\" : \"Dane\",\r\n    \"contact\" : \"786-411-4832\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/students"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:16:02 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"a student already uses the ID 0021\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Get request data to check all fields entered\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"// Test for a successful student creation\r",
+									"pm.test(\"Message contains 'Student information updated successfully' \", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.be.an('array');\r",
+									"    pm.expect(responseJson).to.have.lengthOf(2);\r",
+									"\r",
+									"    pm.expect(responseJson[1]).to.include(\"Student information updated successfully\");\r",
+									"});\r",
+									"\r",
+									"// Test for a successful student creation\r",
+									"pm.test(\"Updated student data matches input\", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.be.an('array');\r",
+									"    pm.expect(responseJson).to.have.lengthOf(2);\r",
+									"\r",
+									"    // Check the second object in the array (student data)\r",
+									"    const studentObject = responseJson[0];\r",
+									"    pm.expect(studentObject).to.be.an('object');\r",
+									"    pm.expect(studentObject.firstname).to.equal(jsonData.firstname);\r",
+									"    pm.expect(studentObject.lastname).to.equal(jsonData.lastname);\r",
+									"    pm.expect(studentObject.contact).to.equal(jsonData.contact);\r",
+									"    pm.expect(studentObject.studentType).to.equal(jsonData.studentType);\r",
+									"    pm.expect(parseInt(studentObject.yearOfStudy)).to.equal(parseInt(jsonData.yearOfStudy));\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{admin_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Alice\",\r\n    \"lastname\" : \"Bon\",\r\n    \"contact\" : \"786-411-8888\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/students/:studentID",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								":studentID"
+							],
+							"variable": [
+								{
+									"key": "studentID",
+									"value": "0026"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Student",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\" : \"Alice\",\r\n    \"lastname\" : \"Bon\",\r\n    \"contact\" : \"786-411-8888\",\r\n    \"studentType\": \"Full-Time\",\r\n    \"yearOfStudy\" : \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/students/:studentID",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										":studentID"
+									],
+									"variable": [
+										{
+											"key": "studentID",
+											"value": "0026"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "254"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:16:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"contact\": \"786-411-8888\",\n        \"firstname\": \"Alice\",\n        \"id\": \"0026\",\n        \"karmaRank\": -99,\n        \"karmaScore\": 0,\n        \"lastname\": \"Bon\",\n        \"studentType\": \"Full-Time\",\n        \"yearOfStudy\": 2\n    },\n    \"Student information updated successfully\"\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "Get All Reviews",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const reviewSchema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"properties\": {\r",
+									"            \"comment\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"created\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"downvotes\": { \r",
+									"                \"type\": \"integer\" \r",
+									"            },\r",
+									"            \"isPositive\": { \r",
+									"                \"type\": \"boolean\" \r",
+									"            },\r",
+									"            \"id\": { \r",
+									"                \"type\": \"integer\" \r",
+									"            },\r",
+									"            \"reviewer\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"studentID\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"upvotes\": { \r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"    },\r",
+									"    \"required\": [\"comment\", \"created\", \"downvotes\", \"isPositive\", \"id\", \"reviewer\", \"studentID\", \"upvotes\"]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response Schema is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(reviewSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}/api/reviews"
+					},
+					"response": [
+						{
+							"name": "Get All Reviews",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{host}}/api/reviews"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 05:17:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"01-12-2023 05:14\",\n        \"downvotes\": 0,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Review By ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Get the URL path and split it by '/'\r",
+									"const urlPath = pm.request.url.getPath();\r",
+									"const pathSegments = urlPath.split('/');\r",
+									"\r",
+									"// Extract the last segment (id)\r",
+									"const id = pathSegments[pathSegments.length - 1];\r",
+									"\r",
+									"// Use the id value in test so parameter value can change, and the test will still work\r",
+									"pm.test(\"Retrieved record with id \" + id, function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.have.property(\"id\", parseInt(id)); // Ensure it's converted to an integer\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains all expected fields\", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    // Define the expected fields\r",
+									"    const expectedFields = [\"comment\", \"created\", \"downvotes\", \"isPositive\", \"id\", \"reviewer\", \"studentID\", \"upvotes\"];\r",
+									"\r",
+									"    // Compare the response data with the expected fields\r",
+									"    for (const field of expectedFields) {\r",
+									"        pm.expect(responseJson).to.have.property(field);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Review By ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 05:15:30 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"comment\": \"very respectful\",\n    \"created\": \"01-12-2023 05:14\",\n    \"downvotes\": 0,\n    \"id\": 1,\n    \"isPositive\": true,\n    \"reviewer\": \"John Mann\",\n    \"reviewerID\": \"0012\",\n    \"studentID\": \"0021\",\n    \"upvotes\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Review By ID - Invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 404\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"should return 'review not found'\", \r",
+									"    function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"        pm.expect(error).to.eql('review not found');\r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "99"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Review By ID - Invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "99"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:17:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"review not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Reviews For Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Get the URL path and split it by '/'\r",
+									"const urlPath = pm.request.url.getPath();\r",
+									"const pathSegments = urlPath.split('/');\r",
+									"\r",
+									"// Extract the last segment (student_id)\r",
+									"const id = pathSegments[pathSegments.length - 2];\r",
+									"\r",
+									"// Use the id value in the test so the parameter value can change, and the test will still work\r",
+									"pm.test(\"Retrieved reviews for student with studentID \" + id, function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    \r",
+									"    // Iterate through the reviews in the response\r",
+									"    responseJson.forEach(review => {\r",
+									"        pm.expect(review).to.have.property(\"studentID\", id);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"const reviewSchema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"properties\": {\r",
+									"            \"comment\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"created\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"downvotes\": { \r",
+									"                \"type\": \"integer\" \r",
+									"            },\r",
+									"            \"isPositive\": { \r",
+									"                \"type\": \"boolean\" \r",
+									"            },\r",
+									"            \"id\": { \r",
+									"                \"type\": \"integer\" \r",
+									"            },\r",
+									"            \"reviewer\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"studentID\": { \r",
+									"                \"type\": \"string\" \r",
+									"            },\r",
+									"            \"upvotes\": { \r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"    },\r",
+									"    \"required\": [\"comment\", \"created\", \"downvotes\", \"isPositive\", \"id\", \"reviewer\", \"studentID\", \"student\", \"upvotes\"]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response Schema is valid\", function() {\r",
+									"    pm.response.to.have.jsonSchema(reviewSchema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/students/:student_id/reviews",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								":student_id",
+								"reviews"
+							],
+							"variable": [
+								{
+									"key": "student_id",
+									"value": "0021"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Reviews For Student",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/students/:student_id/reviews",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										":student_id",
+										"reviews"
+									],
+									"variable": [
+										{
+											"key": "student_id",
+											"value": "0021"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 05:17:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"01-12-2023 05:14\",\n        \"downvotes\": 0,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Upvote Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Upvoted review successfully\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody).to.include(\"review upvoted\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id/upvotes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id",
+								"upvotes"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upvote Review",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id/upvotes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id",
+										"upvotes"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "283"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:17:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"30-11-2023 15:16\",\n        \"downvotes\": 0,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"student\": \"Nick Dell\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 1\n    },\n    \"review upvoted\"\n]"
+						}
+					]
+				},
+				{
+					"name": "Upvote Review - Already Updvoted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Upvoted review already\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody).to.include(\"review already upvoted\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id/upvotes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id",
+								"upvotes"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upvote Review - Already Updvoted",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id/upvotes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id",
+										"upvotes"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:17:43 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"30-11-2023 15:16\",\n        \"downvotes\": 0,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"student\": \"Nick Dell\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 1\n    },\n    \"review already upvoted\"\n]"
+						}
+					]
+				},
+				{
+					"name": "Downvote Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Upvoted review successfully\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody).to.include(\"review downvoted\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id/downvotes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id",
+								"downvotes"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Downvote Review",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id/downvotes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id",
+										"downvotes"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "285"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:17:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"30-11-2023 15:16\",\n        \"downvotes\": 1,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"student\": \"Nick Dell\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 0\n    },\n    \"review downvoted\"\n]"
+						}
+					]
+				},
+				{
+					"name": "Downvote Review - Already Downvoted",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Downvoted review already\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    pm.expect(responseBody).to.include(\"review already downvoted\"); \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/reviews/:review_id/downvotes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								":review_id",
+								"downvotes"
+							],
+							"variable": [
+								{
+									"key": "review_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Downvote Review - Already Downvoted",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/reviews/:review_id/downvotes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"reviews",
+										":review_id",
+										"downvotes"
+									],
+									"variable": [
+										{
+											"key": "review_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "293"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:17:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"comment\": \"very respectful\",\n        \"created\": \"30-11-2023 15:16\",\n        \"downvotes\": 1,\n        \"id\": 1,\n        \"isPositive\": true,\n        \"reviewer\": \"John Mann\",\n        \"reviewerID\": \"0012\",\n        \"student\": \"Nick Dell\",\n        \"studentID\": \"0021\",\n        \"upvotes\": 0\n    },\n    \"review already downvoted\"\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "staff",
+			"item": [
+				{
+					"name": "Create Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Get request data to check all fields entered\r",
+									"let jsonData = JSON.parse(request.data);\r",
+									"\r",
+									"pm.test(\"Review successfully logged with the entered information\", function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseJson).to.be.an('object');\r",
+									"\r",
+									"    pm.expect(responseJson.studentID).to.equal(jsonData.studentID);\r",
+									"    pm.expect(responseJson.isPositive).to.equal(jsonData.isPositive);\r",
+									"    pm.expect(responseJson.comment).to.equal(jsonData.comment);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\" : \"0021\",\r\n    \"isPositive\" : true,\r\n    \"comment\" : \"very respectful\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/reviews"
+					},
+					"response": [
+						{
+							"name": "Create Review",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentID\" : \"0021\",\r\n    \"isPositive\" : true,\r\n    \"comment\" : \"very respectful\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/reviews"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:16:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"comment\": \"very respectful\",\n    \"created\": \"30-11-2023 15:16\",\n    \"downvotes\": 0,\n    \"id\": 1,\n    \"isPositive\": true,\n    \"reviewer\": \"John Mann\",\n    \"reviewerID\": \"0012\",\n    \"student\": \"Nick Dell\",\n    \"studentID\": \"0021\",\n    \"upvotes\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Review - Invalid Request Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error Indicates Invalid Data\", function () {\r",
+									"        let jsonData = pm.response.json();\r",
+									"        pm.expect(jsonData['error'].includes('invalid request data')).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\" : \"\",\r\n    \"isPositive\" : \"\",\r\n    \"comment\" : \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/reviews"
+					},
+					"response": [
+						{
+							"name": "Create Review - Invalid Request Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentID\" : \"\",\r\n    \"isPositive\" : \"\",\r\n    \"comment\" : \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/reviews"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:16:42 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"invalid request data\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Review - Invalid Student ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 400\", function(){\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"let jsonData = JSON.parse(request.data)\r",
+									"\r",
+									"pm.test(\"Error Indicates Student with ID \" + jsonData.studentID + \" does not exist\", function () {\r",
+									"        var {error} = pm.response.json();\r",
+									"       pm.expect(error).to.eql(\"student with ID \" + jsonData.studentID + \" does not exist\");\r",
+									"    }\r",
+									");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\" : \"0001\",\r\n    \"isPositive\" : true,\r\n    \"comment\" : \"very respectful\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}/api/reviews"
+					},
+					"response": [
+						{
+							"name": "Create Review - Invalid Student ID",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"studentID\" : \"0001\",\r\n    \"isPositive\" : true,\r\n    \"comment\" : \"very respectful\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{host}}/api/reviews"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:16:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"student with ID 0001 does not exist\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code: 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"const search_query = pm.request.url.query.get('query');\r",
+									"\r",
+									"const schema = {\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"firstname\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"lastname\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"contact\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"studentType\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"yearOfStudy\": {\r",
+									"        \"type\": \"integer\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\"id\", \"firstname\", \"lastname\", \"contact\", \"studentType\", \"yearOfStudy\"]\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Search Schema is valid\", function () {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Search response includes \" + search_query, function () {\r",
+									"  const responseJson = pm.response.json();\r",
+									"\r",
+									"  // Validate the response JSON against the schema\r",
+									"  pm.expect(responseJson).to.be.jsonSchema(schema);\r",
+									"\r",
+									"  // Check that at least one of the 3 possible fields to search matches the search term\r",
+									"  const search_query_lower = search_query.toLowerCase();\r",
+									"\r",
+									"  const searchMatches = responseJson.some(student => (\r",
+									"    student.id === search_query ||\r",
+									"    student.firstname.toLowerCase().includes(search_query_lower) ||\r",
+									"    student.lastname.toLowerCase().includes(search_query_lower)\r",
+									"  ));\r",
+									"\r",
+									"  pm.expect(searchMatches).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/students/search?query=Dell",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "Dell"
+								}
+							]
+						},
+						"description": "Searches for a student with the given search term. The search term can be the student's student ID or their firstname/lastname."
+					},
+					"response": [
+						{
+							"name": "Search Students",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/students/search?query=Dell",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										"search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "Dell"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "208"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:18:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"contact\": \"0000-377-3283\",\n        \"firstname\": \"Nick\",\n        \"id\": \"0021\",\n        \"karmaRank\": 2,\n        \"karmaScore\": -1,\n        \"lastname\": \"Dell\",\n        \"studentType\": \"Part-Time\",\n        \"yearOfStudy\": 4\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Search Students - No Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code: 200', function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"const search_query = pm.request.url.query.get('query');\r",
+									"\r",
+									"pm.test('Message Indicates No Results for search query ' + search_query, function () {\r",
+									"    var {message} = pm.response.json();\r",
+									"    pm.expect(message).to.eql('No students found with search query ' + search_query);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"value": "Bearer {{staff_access_token}}",
+								"in": "header",
+								"key": "Authorization"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/students/search?query=F45P",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "F45P"
+								}
+							]
+						},
+						"description": "Searches for a student with the given search term. The search term can be the student's student ID or their firstname/lastname."
+					},
+					"response": [
+						{
+							"name": "Search Students - No Results",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/students/search?query=F45P",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"students",
+										"search"
+									],
+									"query": [
+										{
+											"key": "query",
+											"value": "F45P"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 15:18:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.9.10"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No students found with search query F45P\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
