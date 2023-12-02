@@ -28,6 +28,8 @@ class Admin(User):
 		newKarma.studentID = newStudent.id
 		try:
 			db.session.add(newStudent)
+			db.session.commit()
+			
 			db.session.add(newKarma)
 			db.session.commit()
 			return newStudent
