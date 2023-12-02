@@ -26,6 +26,7 @@ class Admin(User):
 		newStudent.karmaID = newKarma.karmaID
 		newKarma.studentID = newStudent.id
 		try:
+			db.session.execute('ALTER TABLE student ADD CONSTRAINT fk_karma_id FOREIGN KEY (karmaID) REFERENCES karma(karmaID)')
 			db.session.add(newStudent)
 			db.session.commit()
 			return newStudent
