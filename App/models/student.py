@@ -11,7 +11,7 @@ class Student(db.Model):
 	studentType = db.Column(db.String(30))  #full-time, part-time or evening
 	yearOfStudy = db.Column(db.Integer, nullable=False)
 	reviews = db.relationship('Review', backref='student', lazy='joined')
-	karmaID = db.Column(db.Integer, db.ForeignKey('karma.karmaID', name='fk_karma_id', use_alter=True), nullable=True)
+	karmaID = db.Column(db.Integer, db.ForeignKey('karma.karmaID', name='fk_karma_id', use_alter=True), nullable=False)
 
 	def __init__(self, id, firstname, lastname, contact, studentType, yearofStudy):
 		self.id = id
