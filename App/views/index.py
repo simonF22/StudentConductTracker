@@ -21,7 +21,10 @@ def init():
 
     try:
         db.drop_all()
+        db.engine.execute('ALTER TABLE karma DROP CONSTRAINT IF EXISTS fk_student_id')
+        db.engine.execute('ALTER TABLE student DROP CONSTRAINT IF EXISTS fk_karma_id')
         db.create_all()
+
         admin= create_admin('bob', 'boblast' , 'bobpass')
             
         staff = create_staff(admin, '0012', 'John', 'Mann', 'johnpass', 'johnmann@schooling.com')
