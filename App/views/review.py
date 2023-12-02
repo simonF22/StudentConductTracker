@@ -70,6 +70,6 @@ def get_reviews_of_student_api(student_id):
         if reviews:
             return jsonify([review.to_json() for review in reviews]), 200
         else:
-            return "No reviews found for the student", 404
-    return "Student does not exist", 404
+            return jsonify(error="no reviews found for the student"), 404
+    return jsonify(error="student does not exist"), 404
 
