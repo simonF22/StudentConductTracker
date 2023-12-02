@@ -34,7 +34,7 @@ def logout_action():
    
 ''' API Routes '''
 
-@auth_views.route('/api/staff/login', methods=['POST'])
+@auth_views.route('/api/login/staff', methods=['POST'])
 def staff_login_api():
 	data = request.json
 	token = jwt_authenticate_staff(data['id'], data['password'])
@@ -43,7 +43,7 @@ def staff_login_api():
 	return jsonify(access_token=token), 200
 
 
-@auth_views.route('/api/admin/login', methods=['POST'])
+@auth_views.route('/api/login/admin', methods=['POST'])
 def admin_login_api():
   data = request.json
   token = jwt_authenticate_admin(data['id'], data['password'])
