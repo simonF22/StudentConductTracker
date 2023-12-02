@@ -13,13 +13,14 @@ class Admin(User):
 
 	def addStudent(self, id, firstname, lastname, contact, studentType, yearofStudy):
 		newKarma = Karma(score=0.0, rank=-99)
+		'''
 		try:
 			db.session.add(newKarma)
 			db.session.commit()
 		except:
 			db.session.rollback()
 			return False
-
+		'''
 
 		newStudent= Student(id, firstname, lastname, contact, studentType, yearofStudy)
 		
@@ -27,6 +28,7 @@ class Admin(User):
 		newKarma.studentID = newStudent.id
 		try:
 			db.session.add(newStudent)
+			db.session.add(newKarma)
 			db.session.commit()
 			return newStudent
 		except:
