@@ -1,0 +1,1215 @@
+{
+	"id": "e221a84d-34f2-433d-8c04-c322ab6cf36a",
+	"name": "Student Conduct Tracker",
+	"timestamp": "2023-12-03T14:08:23.631Z",
+	"collection_id": "25721467-51cd95ae-afe4-4b7d-b94a-ff152419b702",
+	"folder_id": 0,
+	"environment_id": "25721467-573f6f65-b4e9-483b-a708-aca97ad1b2a2",
+	"totalPass": 66,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-12-03T14:08:13.437Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "5c11d642-3326-4609-b188-d8f2ebde8c41",
+			"name": "Init",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/init",
+			"time": 357,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				357
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "610053ad-80f8-4d4d-9316-86491b7a3ec2",
+			"name": "Admin Login",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/login/admin",
+			"time": 185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Admin Access Token Returned": true
+			},
+			"testPassFailCounts": {
+				"Admin Access Token Returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				185
+			],
+			"allTests": [
+				{
+					"Admin Access Token Returned": true
+				}
+			]
+		},
+		{
+			"id": "a5dcc08b-0f73-40af-84f5-65e829bd8415",
+			"name": "Admin Login - Invalid Credentials",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/login/admin",
+			"time": 237,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"should return 'invalid admin credentials'": true,
+				"Status is 401": true
+			},
+			"testPassFailCounts": {
+				"should return 'invalid admin credentials'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				237
+			],
+			"allTests": [
+				{
+					"should return 'invalid admin credentials'": true,
+					"Status is 401": true
+				}
+			]
+		},
+		{
+			"id": "a7c78244-cf86-4f96-baad-99c7b474f393",
+			"name": "Staff Login",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/login/staff",
+			"time": 198,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Staff Access Token Returned": true
+			},
+			"testPassFailCounts": {
+				"Staff Access Token Returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				198
+			],
+			"allTests": [
+				{
+					"Staff Access Token Returned": true
+				}
+			]
+		},
+		{
+			"id": "26b28ade-942c-4f87-aabb-7ce3845a1e5b",
+			"name": "Staff Login - Invalid Credentials",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/login/staff",
+			"time": 182,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"should return 'invalid staff credentials'": true,
+				"Status is 401": true
+			},
+			"testPassFailCounts": {
+				"should return 'invalid staff credentials'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 401": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				182
+			],
+			"allTests": [
+				{
+					"should return 'invalid staff credentials'": true,
+					"Status is 401": true
+				}
+			]
+		},
+		{
+			"id": "04d7acbe-f41f-4261-86e6-8bbb41559e2b",
+			"name": "Get All Staff",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff",
+			"time": 199,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Course Schema Valid": true,
+				"Status is 200": true
+			},
+			"testPassFailCounts": {
+				"Course Schema Valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				199
+			],
+			"allTests": [
+				{
+					"Course Schema Valid": true,
+					"Status is 200": true
+				}
+			]
+		},
+		{
+			"id": "094194a3-e30a-402d-82b6-f76a22234d5c",
+			"name": "Get All Staff - Forbidden",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff",
+			"time": 392,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"should return 'cannot perform that action'": true,
+				"Status is 403": true
+			},
+			"testPassFailCounts": {
+				"should return 'cannot perform that action'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				392
+			],
+			"allTests": [
+				{
+					"should return 'cannot perform that action'": true,
+					"Status is 403": true
+				}
+			]
+		},
+		{
+			"id": "016df26e-f608-4c81-a314-b45684840237",
+			"name": "Get All Students",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students",
+			"time": 192,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Course Schema Valid": true,
+				"Status is 200": true
+			},
+			"testPassFailCounts": {
+				"Course Schema Valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				192
+			],
+			"allTests": [
+				{
+					"Course Schema Valid": true,
+					"Status is 200": true
+				}
+			]
+		},
+		{
+			"id": "01f568e6-97b0-49f6-810e-5c3e078857bb",
+			"name": "Get Student",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/0021",
+			"time": 205,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Course Schema Valid": true,
+				"Status is 200": true
+			},
+			"testPassFailCounts": {
+				"Course Schema Valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Course Schema Valid": true,
+					"Status is 200": true
+				}
+			]
+		},
+		{
+			"id": "a0184804-3840-41ef-8414-223a75e93104",
+			"name": "Get Student - Invalid ID",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/0101",
+			"time": 194,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"should return 'student not found'": true,
+				"Status is 404": true
+			},
+			"testPassFailCounts": {
+				"should return 'student not found'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				194
+			],
+			"allTests": [
+				{
+					"should return 'student not found'": true,
+					"Status is 404": true
+				}
+			]
+		},
+		{
+			"id": "8d7b6b62-08cc-419f-b268-fe7409aaebf3",
+			"name": "Get Staff",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff/0012",
+			"time": 201,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Course Schema Valid": true,
+				"Status is 200": true
+			},
+			"testPassFailCounts": {
+				"Course Schema Valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				201
+			],
+			"allTests": [
+				{
+					"Course Schema Valid": true,
+					"Status is 200": true
+				}
+			]
+		},
+		{
+			"id": "0cd6df29-63f2-493e-a8ce-41699c6042e9",
+			"name": "Get Staff - Invalid ID",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff/0200",
+			"time": 203,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"should return 'staff not found'": true,
+				"Status is 404": true
+			},
+			"testPassFailCounts": {
+				"should return 'staff not found'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				203
+			],
+			"allTests": [
+				{
+					"should return 'staff not found'": true,
+					"Status is 404": true
+				}
+			]
+		},
+		{
+			"id": "a46d93fe-15e2-451d-a612-7a5a06b6a245",
+			"name": "Create Staff",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff",
+			"time": 194,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code: 201": true,
+				"Message contains 'Staff created with ID 0015'": true,
+				"All data have been entered for the staff": true
+			},
+			"testPassFailCounts": {
+				"Status code: 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Message contains 'Staff created with ID 0015'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"All data have been entered for the staff": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				194
+			],
+			"allTests": [
+				{
+					"Status code: 201": true,
+					"Message contains 'Staff created with ID 0015'": true,
+					"All data have been entered for the staff": true
+				}
+			]
+		},
+		{
+			"id": "adfb75b7-d94b-423c-9f64-ea31e03f38ef",
+			"name": "Create Staff - ID Already Exists",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff",
+			"time": 195,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"should return 'a staff already uses the ID 0012'": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"should return 'a staff already uses the ID 0012'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				195
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"should return 'a staff already uses the ID 0012'": true
+				}
+			]
+		},
+		{
+			"id": "05c0e500-963d-4a38-aebb-4214d6041e12",
+			"name": "Create Staff - Invalid Request Data",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/staff",
+			"time": 187,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"Error Indicates Invalid Data": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error Indicates Invalid Data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				187
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"Error Indicates Invalid Data": true
+				}
+			]
+		},
+		{
+			"id": "cbb136a9-6433-45dd-9bab-2beec931ec3e",
+			"name": "Create Student",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students",
+			"time": 205,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code: 201": true,
+				"Message contains 'Student created with ID 0026'": true,
+				"All data have been entered for the student": true
+			},
+			"testPassFailCounts": {
+				"Status code: 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Message contains 'Student created with ID 0026'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"All data have been entered for the student": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Status code: 201": true,
+					"Message contains 'Student created with ID 0026'": true,
+					"All data have been entered for the student": true
+				}
+			]
+		},
+		{
+			"id": "9da4b584-94d7-4a1a-9cc0-05004c7f6dc4",
+			"name": "Create Student - Invalid Request Data",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students",
+			"time": 184,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"Error Indicates Invalid Data": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error Indicates Invalid Data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				184
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"Error Indicates Invalid Data": true
+				}
+			]
+		},
+		{
+			"id": "4b35077e-2300-41e8-b64a-6cd63eca9b2c",
+			"name": "Create Student - ID Already Exists",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students",
+			"time": 188,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"should return 'a student already uses the ID 0021'": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"should return 'a student already uses the ID 0021'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				188
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"should return 'a student already uses the ID 0021'": true
+				}
+			]
+		},
+		{
+			"id": "65aba774-070d-4b42-81a2-65dbacef6b74",
+			"name": "Update Student",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/0026",
+			"time": 193,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Message contains 'Student information updated successfully' ": true,
+				"Updated student data matches input": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Message contains 'Student information updated successfully' ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Updated student data matches input": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				193
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Message contains 'Student information updated successfully' ": true,
+					"Updated student data matches input": true
+				}
+			]
+		},
+		{
+			"id": "02a72f38-51f6-4ada-85dc-9cb9670d2eb4",
+			"name": "Create Review",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews",
+			"time": 246,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code: 201": true,
+				"Review successfully logged with the entered information": true
+			},
+			"testPassFailCounts": {
+				"Status code: 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Review successfully logged with the entered information": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				246
+			],
+			"allTests": [
+				{
+					"Status code: 201": true,
+					"Review successfully logged with the entered information": true
+				}
+			]
+		},
+		{
+			"id": "e50c6a3b-48b0-4c3c-9af0-16fa1341590b",
+			"name": "Create Review - Invalid Request Data",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews",
+			"time": 191,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"Error Indicates Invalid Data": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error Indicates Invalid Data": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				191
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"Error Indicates Invalid Data": true
+				}
+			]
+		},
+		{
+			"id": "2b16b2dd-f4c3-4ba1-a4b9-2e595e93f704",
+			"name": "Create Review - Invalid Student ID",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews",
+			"time": 187,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code: 400": true,
+				"Error Indicates Student with ID 0001 does not exist": true
+			},
+			"testPassFailCounts": {
+				"Status code: 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Error Indicates Student with ID 0001 does not exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				187
+			],
+			"allTests": [
+				{
+					"Status code: 400": true,
+					"Error Indicates Student with ID 0001 does not exist": true
+				}
+			]
+		},
+		{
+			"id": "bef3536c-80d2-474e-83a1-4da755097bd1",
+			"name": "Search Students",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/search?query=Dell",
+			"time": 199,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Search Schema is valid": true,
+				"Search response includes Dell": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Search Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Search response includes Dell": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				199
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Search Schema is valid": true,
+					"Search response includes Dell": true
+				}
+			]
+		},
+		{
+			"id": "9a61265f-ef27-44f6-bb02-e3578f415027",
+			"name": "Search Students - No Results",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/search?query=F45P",
+			"time": 192,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Message Indicates No Results for search query F45P": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Message Indicates No Results for search query F45P": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				192
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Message Indicates No Results for search query F45P": true
+				}
+			]
+		},
+		{
+			"id": "de764dc5-95c5-43d5-a501-ac428ec11c6b",
+			"name": "Get All Reviews",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews",
+			"time": 279,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Response Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				279
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Response Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "7ca4b2e1-b872-44b2-a0eb-2463fdf3ecb5",
+			"name": "Get Review By ID",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/1",
+			"time": 195,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Retrieved record with id 1": true,
+				"Response contains all expected fields": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retrieved record with id 1": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains all expected fields": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				195
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Retrieved record with id 1": true,
+					"Response contains all expected fields": true
+				}
+			]
+		},
+		{
+			"id": "2f50102d-fc5f-4902-a89a-bf64e5acea1f",
+			"name": "Get Review By ID - Invalid ID",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/99",
+			"time": 197,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code: 404": true,
+				"should return 'review not found'": true
+			},
+			"testPassFailCounts": {
+				"Status code: 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"should return 'review not found'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				197
+			],
+			"allTests": [
+				{
+					"Status code: 404": true,
+					"should return 'review not found'": true
+				}
+			]
+		},
+		{
+			"id": "74cb3b72-8497-4fe6-ba04-9ed9175f7646",
+			"name": "Get Reviews For Student",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/students/0021/reviews",
+			"time": 200,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Retrieved reviews for student with studentID 0021": true,
+				"Response Schema is valid": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Retrieved reviews for student with studentID 0021": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				200
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Retrieved reviews for student with studentID 0021": true,
+					"Response Schema is valid": true
+				}
+			]
+		},
+		{
+			"id": "c7ff96d1-904b-4bc2-80f9-0f849e3f9097",
+			"name": "Upvote Review",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/1/upvotes",
+			"time": 744,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Upvoted review successfully": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Upvoted review successfully": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				744
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Upvoted review successfully": true
+				}
+			]
+		},
+		{
+			"id": "4f28695b-c9d6-48d7-8bd6-c62d098b1633",
+			"name": "Upvote Review - Already Updvoted",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/1/upvotes",
+			"time": 183,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Upvoted review already": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Upvoted review already": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				183
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Upvoted review already": true
+				}
+			]
+		},
+		{
+			"id": "0c64ad27-8967-4ff9-b874-601cd50a899a",
+			"name": "Downvote Review",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/1/downvotes",
+			"time": 211,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Upvoted review successfully": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Upvoted review successfully": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				211
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Upvoted review successfully": true
+				}
+			]
+		},
+		{
+			"id": "57df96a5-6d42-47ec-b77f-81b1a57175ab",
+			"name": "Downvote Review - Already Downvoted",
+			"url": "https://student-conduct-tracker-hy7r.onrender.com/api/reviews/1/downvotes",
+			"time": 182,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code: 200": true,
+				"Downvoted review already": true
+			},
+			"testPassFailCounts": {
+				"Status code: 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Downvoted review already": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				182
+			],
+			"allTests": [
+				{
+					"Status code: 200": true,
+					"Downvoted review already": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 7297,
+	"collection": {
+		"requests": [
+			{
+				"id": "5c11d642-3326-4609-b188-d8f2ebde8c41",
+				"method": "GET"
+			},
+			{
+				"id": "610053ad-80f8-4d4d-9316-86491b7a3ec2",
+				"method": "POST"
+			},
+			{
+				"id": "a5dcc08b-0f73-40af-84f5-65e829bd8415",
+				"method": "POST"
+			},
+			{
+				"id": "a7c78244-cf86-4f96-baad-99c7b474f393",
+				"method": "POST"
+			},
+			{
+				"id": "26b28ade-942c-4f87-aabb-7ce3845a1e5b",
+				"method": "POST"
+			},
+			{
+				"id": "04d7acbe-f41f-4261-86e6-8bbb41559e2b",
+				"method": "GET"
+			},
+			{
+				"id": "094194a3-e30a-402d-82b6-f76a22234d5c",
+				"method": "GET"
+			},
+			{
+				"id": "016df26e-f608-4c81-a314-b45684840237",
+				"method": "GET"
+			},
+			{
+				"id": "01f568e6-97b0-49f6-810e-5c3e078857bb",
+				"method": "GET"
+			},
+			{
+				"id": "a0184804-3840-41ef-8414-223a75e93104",
+				"method": "GET"
+			},
+			{
+				"id": "8d7b6b62-08cc-419f-b268-fe7409aaebf3",
+				"method": "GET"
+			},
+			{
+				"id": "0cd6df29-63f2-493e-a8ce-41699c6042e9",
+				"method": "GET"
+			},
+			{
+				"id": "a46d93fe-15e2-451d-a612-7a5a06b6a245",
+				"method": "POST"
+			},
+			{
+				"id": "adfb75b7-d94b-423c-9f64-ea31e03f38ef",
+				"method": "POST"
+			},
+			{
+				"id": "05c0e500-963d-4a38-aebb-4214d6041e12",
+				"method": "POST"
+			},
+			{
+				"id": "cbb136a9-6433-45dd-9bab-2beec931ec3e",
+				"method": "POST"
+			},
+			{
+				"id": "9da4b584-94d7-4a1a-9cc0-05004c7f6dc4",
+				"method": "POST"
+			},
+			{
+				"id": "4b35077e-2300-41e8-b64a-6cd63eca9b2c",
+				"method": "POST"
+			},
+			{
+				"id": "65aba774-070d-4b42-81a2-65dbacef6b74",
+				"method": "PUT"
+			},
+			{
+				"id": "02a72f38-51f6-4ada-85dc-9cb9670d2eb4",
+				"method": "POST"
+			},
+			{
+				"id": "e50c6a3b-48b0-4c3c-9af0-16fa1341590b",
+				"method": "POST"
+			},
+			{
+				"id": "2b16b2dd-f4c3-4ba1-a4b9-2e595e93f704",
+				"method": "POST"
+			},
+			{
+				"id": "bef3536c-80d2-474e-83a1-4da755097bd1",
+				"method": "GET"
+			},
+			{
+				"id": "9a61265f-ef27-44f6-bb02-e3578f415027",
+				"method": "GET"
+			},
+			{
+				"id": "de764dc5-95c5-43d5-a501-ac428ec11c6b",
+				"method": "GET"
+			},
+			{
+				"id": "7ca4b2e1-b872-44b2-a0eb-2463fdf3ecb5",
+				"method": "GET"
+			},
+			{
+				"id": "2f50102d-fc5f-4902-a89a-bf64e5acea1f",
+				"method": "GET"
+			},
+			{
+				"id": "74cb3b72-8497-4fe6-ba04-9ed9175f7646",
+				"method": "GET"
+			},
+			{
+				"id": "c7ff96d1-904b-4bc2-80f9-0f849e3f9097",
+				"method": "PUT"
+			},
+			{
+				"id": "4f28695b-c9d6-48d7-8bd6-c62d098b1633",
+				"method": "PUT"
+			},
+			{
+				"id": "0c64ad27-8967-4ff9-b874-601cd50a899a",
+				"method": "PUT"
+			},
+			{
+				"id": "57df96a5-6d42-47ec-b77f-81b1a57175ab",
+				"method": "PUT"
+			}
+		]
+	}
+}
