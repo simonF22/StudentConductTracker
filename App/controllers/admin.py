@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import Admin, Staff, Student
+from App.models import Admin, Staff, Student, Karma
 
 
 def create_admin(firstname, lastname, password):
@@ -90,3 +90,4 @@ def search_student(studentID):
     if student:
         return student
     return None
+

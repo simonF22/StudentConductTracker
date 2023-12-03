@@ -11,7 +11,7 @@ class Student(db.Model):
 	studentType = db.Column(db.String(30))  #full-time, part-time or evening
 	yearOfStudy = db.Column(db.Integer, nullable=False)
 	reviews = db.relationship('Review', backref='student', lazy='joined')
-	karmaID = db.Column(db.Integer, db.ForeignKey('karma.karmaID', name='fk_karma_id', use_alter=True), nullable=False)
+	karmaID = db.Column(db.Integer, db.ForeignKey('karma.karmaID', name='fk_karma_id', use_alter=True), nullable=True)
 
 	def __init__(self, id, firstname, lastname, contact, studentType, yearofStudy):
 		self.id = id
@@ -33,14 +33,26 @@ class Student(db.Model):
 		
 		
 	def to_json(self):
-		karma = Karma.query.get(self.karmaID)
-		return {
-			"id": self.id,
-			"firstname": self.firstname,
-			"lastname": self.lastname,
-			"contact": self.contact,
-			"studentType": self.studentType,
-			"yearOfStudy": self.yearOfStudy,
-			"karmaScore" : karma.score,
-			"karmaRank" : karma.rank
-    	}
+		if self.karmaID != None:
+			karma = Karma.query.get(self.karmaID)
+			return {
+				"id": self.id,
+				"firstname": self.firstname,
+				"lastname": self.lastname,
+				"contact": self.contact,
+				"studentType": self.studentType,
+				"yearOfStudy": self.yearOfStudy,
+				"karmaScore" : karma.score,
+				"karmaRank" : karma.rank
+			}
+		else:
+			return {
+				"id": self.id,
+				"firstname": self.firstname,
+				"lastname": self.lastname,
+				"contact": self.contact,
+				"studentType": self.studentType,
+				"yearOfStudy": self.yearOfStudy,
+				"karmaScore" : None,
+				"karmaRank" : None
+			}

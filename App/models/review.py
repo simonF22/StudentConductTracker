@@ -107,7 +107,7 @@ class Review(db.Model):
         "id": self.id,
         "reviewerID" : self.reviewer.id,
         "reviewer": self.reviewer.firstname + " " + self.reviewer.lastname,
-        "studentID": self.student.id,
+        "studentID": self.studentID,
         "created": self.created.strftime("%d-%m-%Y %H:%M"),  #format the date/time
         "comment": self.comment,
         "isPositive": self.isPositive,
